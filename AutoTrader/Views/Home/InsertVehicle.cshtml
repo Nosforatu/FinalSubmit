@@ -1,0 +1,69 @@
+﻿@model AutoTrader.Models.ViewModels.AutoDealer.InsertVehicleViewModel
+
+@{
+    ViewData["Title"] = "InsertVehicle";
+}
+
+@if (Model.VehicleId == Guid.Empty)
+{
+    <text><h2>Insert</h2></text>
+}
+else
+{
+    <text><h2>Update</h2></text>
+}
+
+<h4>Vehicle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="@if (Model.VehicleId == Guid.Empty) { <text>Insert</text>} else { <text>Update</text>}" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Make" class="control-label"></label>
+                <input asp-for="Make" class="form-control" />
+                <span asp-validation-for="Make" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineCapacity" class="control-label"></label>
+                <input asp-for="EngineCapacity" class="form-control" />
+                <span asp-validation-for="EngineCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CylinderVariant" class="control-label"></label>
+                <input asp-for="CylinderVariant" class="form-control" />
+                <span asp-validation-for="CylinderVariant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TopSpeed" class="control-label"></label>
+                <input asp-for="TopSpeed" class="form-control" />
+                <span asp-validation-for="TopSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <input type="hidden" value="@Model.VehicleId" name="VehicleId" class="form-control" />
+            <div class="form-group">
+                <input type="submit" value="@if (Model.VehicleId == Guid.Empty) { <text>Insert</text>} else { <text>Update</text>}" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@if (@Model.Message != null)
+{
+    <div id="snackbar">@Model.Message</div>
+
+}
+

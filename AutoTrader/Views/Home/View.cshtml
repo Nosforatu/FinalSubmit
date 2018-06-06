@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AutoTrader.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Make)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EngineCapacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CylinderVariant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TopSpeed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EngineCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CylinderVariant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopSpeed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VehicleId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.VehicleId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,92 @@
+﻿@model AutoTrader.Models.ViewModels.AutoDealer.IndexViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>Inventory</h2>
+
+<p>
+    <a asp-action="InsertVehicle">Insert New Vehicle</a>
+</p>
+<div>
+    <h3>Report Filtering</h3>
+    <form>
+        Minimum Price <select asp-for="Filter.PriceMinimum" asp-items="Model.Filter.PriceRange"><option value="">Not Applicable</option></select><br />
+        Maximum Price <select asp-for="Filter.PriceMaximum" asp-items="Model.Filter.PriceRange"><option value="">Not Applicable</option></select><br />
+        Search : <input placeholder="Search" asp-for="Filter.SearchCriteria" /><br />
+        Engin Capacit of 2L and higher <input type="checkbox" asp-for="Filter.EnginCapacity" /><br />
+        Celinders <select asp-for="Filter.CelinderVariant" asp-items="Model.Filter.CelinderOptions"><option value="">Not Applicable</option></select><br />
+        Singul Celinder Capacity <input type="number" step="0.1" asp-for="Filter.SingularCelinderCapacity" /><br />
+        <button type="submit">Filter</button>
+    </form>
+    <form>
+        <button type="submit">Clear</button>
+    </form>
+   
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Model
+            </th>
+            <th>
+                Make
+            </th>
+            <th>
+                Engine Capacity
+            </th>
+            <th>
+                Cylinder Variant
+            </th>
+            <th>
+                Top Speed
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Vehicles)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EngineCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CylinderVariant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopSpeed) km/h
+            </td>
+            <td>
+                R @item.Price.ToString("0.00")
+            </td>
+            <td>
+                <a asp-action="UpdateVehicle" asp-route-VehicleId="@item.VehicleId">Edit</a> |
+                <a class="btn-delete-vehickle"
+                   data-id="@item.VehicleId"
+                   data-toggle="modal"
+                   data-target="#delete-modal"
+                   data-backdrop="static"
+                   data-keyboard="false">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div id="snackbar">@Model.Message</div>
+
+@Html.Partial("DeleteModal")
+
+
