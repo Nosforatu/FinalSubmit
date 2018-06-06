@@ -34,6 +34,7 @@ namespace AutoTrader.Controllers
             vm.QueryName = "Air Pressure";
 
             vm.Values = await vehicleService.GetVehicles()
+                .Where(w => w.CylinderVariant > 0)
                 .Select(s => new AirPresure()
                 {
                     Name = String.Format("{0} {1}", s.Make,s.Model),
@@ -54,6 +55,7 @@ namespace AutoTrader.Controllers
             AirPressureViewModel vm = new AirPressureViewModel();
             vm.QueryName = "V8 Celinder cars";
             vm.Values = await vehicleService.GetVehicles()
+                .Where(w => w.CylinderVariant > 0)
                 .Select(s => new AirPresure()
                 {
                     Name = String.Format("{0} {1}", s.Make, s.Model),

@@ -17,11 +17,11 @@ namespace AutoTrader.Models
         public string Make { get; set; }
 
         [Required]
-        [Range(1,10)]
+        [Range(0.1, Double.MaxValue)]
         public double EngineCapacity { get; set; }
 
         [Required]
-        [Range(1, 20)]
+        [Range(1, int.MaxValue)]
         public int CylinderVariant { get; set;  }
 
         [Required]
